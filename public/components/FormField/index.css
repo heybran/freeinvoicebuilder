@@ -18,13 +18,19 @@
   background-color: var(--color-border-normal);
 }
 
+:host([theme="primary"]) {
+  background-color: var(--color-primary);
+  color: whitesmoke;
+}
+
+:host([theme="white"]) {
+  background-color: whitesmoke;
+  color: var(--color-input);
+}
+
 :host([type=button]:hover) {
   border-color: var(--color-primary);
   box-shadow: var(--box-shadow-primary);
-}
-
-:host([type=button]) ::slotted(input) {
-  cursor: pointer;
 }
 
 ::slotted(input) {
@@ -37,6 +43,12 @@
   width: 100%;
   font-size: inherit;
   font-family: inherit;
+  color: inherit;
+}
+
+::slotted(input[type=button]),
+::slotted(input[type=submit]) {
+  cursor: pointer;
 }
 
 /* not working */
