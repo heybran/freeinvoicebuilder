@@ -63,12 +63,12 @@ const signup = async ({ request, response, }: { request: any; response: any; }) 
 const signin = async ({ request, response}: { request: any; response: any; }) => {
   const URI = `${BASE_URI}/findOne`;
   const body = await request.body();
-  const { username, password } = await body.value;
+  const { email, password } = await body.value;
   const query = {
     collection: COLLECTION,
     database: DATABASE,
     dataSource: DATA_SOURCE,
-    filter: { username: username }
+    filter: { email: email }
   };
   options.body = JSON.stringify(query);
   const dataResponse = await fetch(URI, options);
@@ -107,7 +107,7 @@ const signin = async ({ request, response}: { request: any; response: any; }) =>
   // authenticate a user
   const payload = {
     id: user.document._id,
-    name: username
+    email: email
   };
 
   const jwt = await create({ alg: 'HS512', type: 'JWT' }, { payload }, key);
@@ -115,7 +115,7 @@ const signin = async ({ request, response}: { request: any; response: any; }) =>
     response.status = 200;
     response.body = {
       userId: user.document._id,
-      username: user.document.username,
+      email: user.document.email,
       token: jwt
     }
   } else {
