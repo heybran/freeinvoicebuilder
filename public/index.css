@@ -47,6 +47,8 @@ header {
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
   color: #343846;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 nav {
@@ -108,6 +110,12 @@ form {
   margin-top: 4rem;
 }
 
+.form-field-wrapper.has-columns-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+}
+
 .form-field-wrapper label {
   margin-bottom: .5rem;
   display: inline-block;
@@ -132,4 +140,29 @@ form {
 
 .column-span-full {
   grid-column: 1 / -1;
+}
+
+#signup-form, #signin-form {
+  width: 25em;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  padding: 1rem 2rem;
+  grid-template-columns: 1fr;
+  margin: 0;
+  box-shadow: 0 0 16px -4px #DEDEDE;
+  transform: translateX(-100%);
+  transition: transform .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#signup-form.opened, #signin-form.opened {
+  transform: translateX(0);
+}
+
+header .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
 }
