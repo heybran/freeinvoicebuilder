@@ -21,6 +21,8 @@ import {
   getInvoice
 } from "../controllers/invoices.ts"; // Import controller methods
 
+import { createPdf } from "../controllers/pdf.ts";
+
 const router = new Router();
 
 // Implement routes
@@ -41,6 +43,10 @@ router
 router
   .post('/api/invoices', authorized, addInvoice)
   .get('/api/invoices', authorized, getInvoices)
-  .get('/api/invoices/:invoiceNumber', authorized, getInvoice)
+  .get('/api/invoices/:invoiceNumber', authorized, getInvoice);
+
+// pdf routes
+router
+  .post('/api/pdf/create', authorized, createPdf);
 
 export default router;

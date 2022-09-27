@@ -19,12 +19,16 @@ const handleInvoiceFormSubmit = (e) => {
   e.preventDefault();
   // const formData = new FormData(invoiceForm);
   // console.log(formData);
-  const data = getFormDate(invoiceForm);
+  const data = {
+    ...getFormDate(invoiceForm),
+    paid: false
+  };
 
   const options = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${localStorage.getItem('token')}`
     },
     body: JSON.stringify(data)
   };
@@ -37,8 +41,30 @@ const handleInvoiceFormSubmit = (e) => {
     .catch(err => console.error(err));
 }
 
-const showSignupForm = () => signupForm.classList.add('opened');
-const showSigninForm = () => signinForm.classList.add('opened');
+const hideVisibleForm = (e) => {
+  const formVisible = document.querySelector('form.opened');
+  if (!e.target.closest('form.opened') && formVisible) {
+    formVisible.classList.remove('opened');
+    document.removeEventListener('click', hideVisibleForm);
+  }
+}
+
+const showSignupForm = () => {
+  signupForm.classList.add('opened')
+  const id = setTimeout(() => {
+    document.addEventListener('click', hideVisibleForm);
+    clearTimeout(id);
+  }, 0);
+};
+
+const showSigninForm = () => {
+  signinForm.classList.add('opened')
+  const id = setTimeout(() => {
+    document.addEventListener('click', hideVisibleForm);
+    clearTimeout(id);
+  }, 0);
+};
+
 const handleSignup = (e) => {
   e.preventDefault();
   const data = getFormDate(signupForm);
@@ -69,7 +95,7 @@ const handleSignin = (e) => {
 
   fetch('./api/users/signin', options)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => localStorage.setItem('token', data.token))
     .catch(err => console.error(err));
 }
 
@@ -78,5 +104,3 @@ openSignupButton.addEventListener('click', showSignupForm);
 openSigninButton.addEventListener('click', showSigninForm);
 signupForm.addEventListener('submit', handleSignup);
 signinForm.addEventListener('submit', handleSignin);
-
-
