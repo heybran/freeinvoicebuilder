@@ -6,7 +6,18 @@ export const createPdf = async (/*{ request, response}: { request: any, response
   // const body = await request.body();
   // const invoiceData = await body.value;
   const templte = await Deno.readTextFile('./templates/template1.html');
-  console.log(templte);
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.setContent(templte);
+  await page.emulateMediaType('screen');
+  await page.pdf({
+    path: 'mypdf.pdf',
+    format: 'A4',
+    printBackground: true
+  });
+
+  console.log('done');
+  await browser.close();
 }
 
 createPdf();
