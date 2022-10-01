@@ -33,10 +33,17 @@ const handleInvoiceFormSubmit = (e) => {
     body: JSON.stringify(data)
   };
 
-  fetch('./api/invoices', options)
+  // fetch('./api/invoices', options)
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data)
+  //   })
+  //   .catch(err => console.error(err));
+  
+  fetch('/api/pdf/create', options)
     .then(res => res.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
     })
     .catch(err => console.error(err));
 }

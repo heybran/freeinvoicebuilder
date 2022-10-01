@@ -47,6 +47,6 @@ router
 
 // pdf routes
 router
-  .post('/api/pdf/create', authorized, createPdf);
+  .post('/api/pdf/create', /*authorized,*/ createPdf);
 
 export default router;
