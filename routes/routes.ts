@@ -12,7 +12,8 @@ import {
 
 import { 
   signup,
-  signin
+  signin,
+  sendEmail
 } from "../controllers/users.ts"; // Import controller methods
 
 import { 
@@ -37,7 +38,8 @@ router
 // user routes
 router
   .post('/api/users/signup', signup) // Signup a user
-  .post('/api/users/signin', signin);
+  .post('/api/users/signin', signin)
+  .post('/api/users/verification', sendEmail);
 
 // invoice routes  
 router
