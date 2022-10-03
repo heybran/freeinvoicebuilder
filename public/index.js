@@ -1,4 +1,5 @@
 import FormField from "./components/FormField/index.js";
+import FormButton from "./components/FormButton/index.js";
 
 const invoiceForm = document.forms['invoice-form'];
 const signupForm = document.forms['signup-form'];
@@ -31,7 +32,7 @@ const handleInvoiceFormSubmit = (e) => {
       'Authorization': `Basic ${localStorage.getItem('token')}`
     },
     body: JSON.stringify(data)
-  };
+  }; 
 
   // fetch('./api/invoices', options)
   //   .then(res => res.json())
@@ -83,7 +84,7 @@ const handleSignup = (e) => {
     body: JSON.stringify(data)
   };
 
-  fetch('./api/users/signup', options)
+  fetch('/api/users/verification', options)
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(err => console.error(err));
