@@ -1,8 +1,9 @@
 import { config } from "https://deno.land/x/dotenv/mod.ts";
-const { DATA_API_KEY, APP_ID } = config();
+const { DATA_API_KEY, APP_ID, SENDINBLUE_API_KEY } = config();
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import { create } from "https://deno.land/x/djwt/mod.ts";
 import { key } from "../utils/apiKey.ts";
+import { sendSimpleMail } from "https://deno.land/x/sendgrid@0.0.3/mod.ts?s=sendSimpleMail";
 
 const BASE_URI = `https://data.mongodb-api.com/app/${APP_ID}/endpoint/data/v1/action`;
 const DATA_SOURCE = "Cluster0";
@@ -17,6 +18,28 @@ const options = {
   },
   body: ""
 };
+
+const sendEmail = async ({ request, response, }: { request: any; response: any; }) => {
+  try {
+    if (!request.hasBody) {
+      response.status = 400;
+      response.body = {
+        success: false,
+        msg: "No Data",
+      };
+    } else {
+      const body = await request.body();
+      const user = await body.value;
+  
+      console.log(user);
+    }
+  } catch (err) {
+    response.body = {
+      success: false,
+      msg: err.toString(),
+    };
+  }
+}
 
 const signup = async ({ request, response, }: { request: any; response: any; }) => {
   try {
@@ -300,4 +323,4 @@ const getIncompleteTodos = async ({ response }: { response: any }) => {
   }
 };
 
-export { signup, signin, getTodo, updateTodo, deleteTodo, getIncompleteTodos };
+export { sendEmail, signup, signin, getTodo, updateTodo, deleteTodo, getIncompleteTodos };
