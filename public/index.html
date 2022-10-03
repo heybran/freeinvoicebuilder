@@ -266,9 +266,12 @@
           <form-field>
             <input slot="input" type="button" value="Preview" id="preview-button">
           </form-field>
-          <form-field theme="primary">
-            <input slot="input" type="submit" value="Submit" id="invoice-submit-button">
-          </form-field>
+          <form-button theme="primary" has-loader>
+            <button slot="button" type="submit" id="invoice-submit-button">
+              <div class="button-loader"></div>
+              <div class="button-text">Submit</div>
+            </button>
+          </form-button>
         </div>
       </form>
     </div> <!-- content div -->
