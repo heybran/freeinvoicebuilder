@@ -4,7 +4,7 @@ import { create } from "https://deno.land/x/djwt/mod.ts";
 import { key } from "../utils/apiKey.ts";
 import { verifyEmail } from "./email.ts";
 
-const { DATA_API_KEY, APP_ID, SENDINBLUE_API_KEY } = config();
+const { DATA_API_KEY, APP_ID } = config();
 
 const BASE_URI = `https://data.mongodb-api.com/app/${APP_ID}/endpoint/data/v1/action`;
 const DATA_SOURCE = "Cluster0";
@@ -47,13 +47,23 @@ export const signup = async ({ request, response, }: { request: any; response: a
       options.body = JSON.stringify(query);
       const dataResponse = await fetch(URI, options);
       const { insertedId } = await dataResponse.json();
-      
-      response.status = 201;
-      response.body = {
-        success: true,
-        user: user.username,
-        insertedId
-      };
+      console.log('user', user);
+      const emailSent = await verifyEmail(user);
+
+      if (!emailSent) {
+        response.status = 500;
+        response.body = {
+          success: false,
+          msg: `An error occured while sending an verification link to your email ${user.email}`
+        }
+      } else {
+        response.status = 201;
+        response.body = {
+          success: true,
+          user: user.username,
+          insertedId
+        };
+      }
     }
   } catch (err) {
     response.body = {

@@ -84,7 +84,7 @@ const handleSignup = (e) => {
     body: JSON.stringify(data)
   };
 
-  fetch('/api/users/verification', options)
+  fetch('/api/users/signup', options)
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(err => console.error(err));
