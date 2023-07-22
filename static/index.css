@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --padding-input: 12px;
+  --color-input: #4f5464;
+  --width-border: 2px;
+  --color-border-normal: #d3dae4;
+  --radius-border: 6px;
+  --color-primary: #6644ff;
+  --box-shadow-primary: 0 0 16px -8px var(--color-primary);
+
+  --light-gray: #F1F1FB;
+  --shadow: #ceced3;
+  --header-bg: #9292AE;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --body-padding: 2rem;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  /* gap: 3rem; */
+  background-color: white;
+  /* padding: 1.2rem;
+  padding-right: 2.2rem; */
+  height: 100vh;
+  /* height: calc(100vh - var(--body-padding) * 2); */
+}
+
+header {
+  background-color: #DEDEED;
+  padding: 2rem 1rem;
+  overflow: hidden;
+  /* border-radius: 1em; */
+  color: #343846;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.content {
+  padding: 3em;
+  overflow: scroll;
+}
+
+nav {
+  margin-top: 4rem;
+}
+
+nav a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  color: inherit;
+  border-radius: .5em;
+  text-decoration: none;
+  padding: .5em 1em;
+  align-items: center;
+  user-select: none;
+}
+
+nav a + a {
+  margin-top: .5rem;
+}
+
+nav a.active {
+    background-color: white;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile__image {
+  width: 3.2em;
+  height: 3.2em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid whitesmoke;
+  background-color: whitesmoke;
+}
+
+.profile__name {
+  font-weight: 600;
+}
+
+.profile__email {
+  font-size: .8em;
+  filter: brightness(80%);
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  place-content: start;
+  margin-top: 4rem;
+}
+
+.form-field-wrapper.has-columns-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+}
+
+.form-field-wrapper label {
+  margin-bottom: .5rem;
+  display: inline-block;
+}
+
+.display-contents {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: inherit;
+  grid-template-columns: 1fr 1.5fr .5fr 2fr 4fr min-content;
+  align-items: flex-end;
+  gap: inherit;
+  gap: 10px;
+  border: 1px solid #DEDEED;
+  --space: .5rem;
+  margin-inline: calc(var(--space) * -1); 
+  padding-inline: calc(var(--space) * 1);
+  padding-block: .5rem;
+  border-radius: .5rem;
+}
+
+.column-span-2 {
+  grid-column: span 2;
+}
+
+.column-span-full {
+  grid-column: 1 / -1;
+}
+
+#signup-form, #signin-form {
+  width: 25em;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  padding: 1rem 2rem;
+  grid-template-columns: 1fr;
+  margin: 0;
+  box-shadow: 0 0 16px -4px #DEDEDE;
+  transform: translateX(-100%);
+  transition: transform .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#signup-form.opened, #signin-form.opened {
+  transform: translateX(0);
+}
+
+header .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}

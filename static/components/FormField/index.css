@@ -1,0 +1,67 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0;
+  padding-inline: var(--padding-input);
+  color: var(--color-input);
+  border: var(--width-border) solid var(--color-border-normal);
+  border-radius: var(--radius-border);
+}
+
+:host(:focus-within) {
+  border-color: var(--color-primary);
+  box-shadow: var(--box-shadow-primary);
+}
+
+:host([type=button]) {
+  background-color: var(--color-border-normal);
+}
+
+:host([theme="primary"]) {
+  background-color: var(--color-primary);
+  color: whitesmoke;
+}
+
+:host([theme="white"]) {
+  background-color: whitesmoke;
+  color: var(--color-input);
+}
+
+:host([type=button]:hover) {
+  border-color: var(--color-primary);
+  box-shadow: var(--box-shadow-primary);
+}
+
+::slotted(input) {
+  padding-inline: 0;
+  padding-block: var(--padding-input);
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  appearance: none;
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+}
+
+::slotted(input[type=button]),
+::slotted(input[type=submit]) {
+  cursor: pointer;
+}
+
+/* not working */
+::slotted(input[type="date"]:-webkit-inner-spin-button),
+::slotted(input[type="date"]:-webkit-calendar-picker-indicator) {
+  display: none;
+  -webkit-appearance: none;
+}
+
+::slotted(input:focus) {
+  outline: none;
+}
+
+::slotted(svg) {
+
+}
