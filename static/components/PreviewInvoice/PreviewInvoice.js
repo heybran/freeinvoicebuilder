@@ -1,5 +1,6 @@
 import BaseElement from '../BaseElement/BaseElement.js';
 import sheet from './invoices.css' assert { type: 'css' };
+import template from './template.js';
 
 export default class PreviewInvoice extends BaseElement {
   static get observedAttributes() {
@@ -22,8 +23,8 @@ export default class PreviewInvoice extends BaseElement {
     this.shadowRoot.adoptedStyleSheets = [sheet];
   }
 
-  set html(htmlString) {
-    this.shadowRoot.querySelector('output').innerHTML = htmlString;
+  set html(data) {
+    this.shadowRoot.querySelector('output').innerHTML = template(data);
   }
 
   open() {

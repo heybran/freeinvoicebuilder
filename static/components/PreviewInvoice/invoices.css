@@ -2,6 +2,15 @@
   box-sizing: border-box;
 }
 
+dialog {
+  width: 60rem;
+}
+
+output {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 section {
   margin-top: 1rem;
 }
