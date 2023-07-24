@@ -196,22 +196,22 @@
           </form-field>
         </div>
         <div class="display-contents" id="invoice-body">
+            <div class="form-field-wrapper repeatable">
+                <label>Invoice Item</label>
+                <form-field>
+                <input type="text" name="invoiceItem" slot="input" autocomplete="off" required data-body>
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-user">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                </form-field>
+            </div>
           <div class="form-field-wrapper repeatable">
             <label>Quantity</label>
             <form-field>
               <input type="text" inputmode="numeric" name="invoiceItemQuantity" slot="input" autocomplete="off" required data-body>
-              <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="feather feather-user">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </form-field>
-          </div>
-          <div class="form-field-wrapper repeatable">
-            <label>Rate</label>
-            <form-field>
-              <input type="number" name="invoiceItemRate" slot="input" autocomplete="off" required data-body>
               <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="feather feather-user">
@@ -233,9 +233,9 @@
             </form-field>
           </div>
           <div class="form-field-wrapper repeatable">
-            <label>Invoice Item</label>
+            <label>Unit Price</label>
             <form-field>
-              <input type="text" name="invoiceItem" slot="input" autocomplete="off" required data-body>
+              <input type="number" name="invoiceItemUnitPrice" slot="input" autocomplete="off" required data-body>
               <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="feather feather-user">
@@ -244,6 +244,19 @@
               </svg>
             </form-field>
           </div>
+          <div class="form-field-wrapper repeatable">
+            <label>Tax</label>
+            <form-field>
+              <input type="number" name="invoiceItemTax" slot="input" autocomplete="off" required data-body>
+              <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-user">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </form-field>
+          </div>
+
           <div class="form-field-wrapper repeatable">
             <label>Details</label>
             <form-field>

@@ -126,13 +126,13 @@ form {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: inherit;
-  grid-template-columns: 1fr 1.5fr .5fr 2fr 4fr min-content;
+  grid-template-columns: 2fr .5fr .5fr 1fr 1fr 4fr min-content;
   align-items: flex-end;
   gap: inherit;
   gap: 10px;
   border: 1px solid #DEDEED;
   --space: .5rem;
-  margin-inline: calc(var(--space) * -1); 
+  margin-inline: calc(var(--space) * -1);
   padding-inline: calc(var(--space) * 1);
   padding-block: .5rem;
   border-radius: .5rem;
