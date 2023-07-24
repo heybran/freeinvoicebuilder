@@ -1,6 +1,7 @@
 // @ts-check
 import FormField from "./components/FormField/index.js";
 import FormButton from "./components/FormButton/index.js";
+import PreviewInvoice from "./components/PreviewInvoice/PreviewInvoice.js";
 
 const undefinedElements = document.querySelectorAll(':not(:defined)');
 const promises = [...undefinedElements].map(
@@ -45,16 +46,22 @@ const getFormDate = (form) => {
     .filter(elem => elem.name && elem.form)
     .forEach(elem => {
       if (elem.hasAttribute('data-header')) {
-        header[elem.name] = elem.value
+        header[elem.name] = elem.value;
       }
 
       if (elem.hasAttribute('data-body')) {
-        //
+        body.push({
+          [elem.name]: elem.value
+        })
       }
-      
     });
+
+  console.log({ header, body })
   
-  return data;
+  return {
+    header,
+    body
+  };
 }
 
 const handleInvoicePreview = (e) => {
@@ -77,6 +84,8 @@ const handleInvoicePreview = (e) => {
     .then(res => res.json())
     .then(data => {
       console.log(data)
+      document.querySelector('preview-invoice').html = data.data;
+      document.querySelector('preview-invoice').open();
     })
     .catch(err => console.error(err));
 }
