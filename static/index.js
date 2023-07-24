@@ -32,32 +32,29 @@ const addInvoiceDetails = (e) => {
     if (input.name) {
       input.name = input.name + id;
     }
-  
+
     invoiceBody.append(field);
     // invoiceBody.insertBefore(field, e.target.closest('.form-field-wrapper'));
   });
 }
 
 const getFormDate = (form) => {
+  const elementsPerInvoiceItem = 6;
+
   const header = {};
-  const body = [
-  ];
-  Array.from(form.elements)
-    .filter(elem => elem.name && elem.form)
-    .forEach(elem => {
-      if (elem.hasAttribute('data-header')) {
-        header[elem.name] = elem.value;
-      }
+  const headerElements = Array.from(form.elements)
+    .filter(elem => elem.name && elem.form && elem.hasAttribute('data-header'));
+  headerElements.forEach(elem => header[elem.name] = elem.value);
 
-      if (elem.hasAttribute('data-body')) {
-        body.push({
-          [elem.name]: elem.value
-        })
-      }
-    });
+  const bodyElements = Array.from(form.elements)
+    .filter(elem => elem.name && elem.form && elem.hasAttribute('data-body'));
+  const body = Array.from({ length: bodyElements.length / elementsPerInvoiceItem }, () => ({}));
 
-  console.log({ header, body })
-  
+  bodyElements.forEach((elem, index) => {
+    const group = Math.floor(index / elementsPerInvoiceItem);
+    body[group][elem.name.replace(/\d/g, "")] = elem.value;
+  });
+
   return {
     header,
     body
@@ -71,23 +68,26 @@ const handleInvoicePreview = (e) => {
     paid: false
   };
 
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ${localStorage.getItem('token')}`
-    },
-    body: JSON.stringify(data)
-  }; 
+  document.querySelector('preview-invoice').html = data;
+  document.querySelector('preview-invoice').open();
 
-  fetch('/api/pdf/preview', options)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      document.querySelector('preview-invoice').html = data.data;
-      document.querySelector('preview-invoice').open();
-    })
-    .catch(err => console.error(err));
+  // const options = {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': `Basic ${localStorage.getItem('token')}`
+  //   },
+  //   body: JSON.stringify(data)
+  // };
+
+  // fetch('/api/pdf/preview', options)
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data)
+  //     document.querySelector('preview-invoice').html = data.data;
+  //     document.querySelector('preview-invoice').open();
+  //   })
+  //   .catch(err => console.error(err));
 }
 
 const handleInvoiceFormSubmit = (e) => {
@@ -106,7 +106,7 @@ const handleInvoiceFormSubmit = (e) => {
       'Authorization': `Basic ${localStorage.getItem('token')}`
     },
     body: JSON.stringify(data)
-  }; 
+  };
 
   // fetch('./api/invoices', options)
   //   .then(res => res.json())
@@ -114,7 +114,7 @@ const handleInvoiceFormSubmit = (e) => {
   //     console.log(data)
   //   })
   //   .catch(err => console.error(err));
-  
+
   fetch('/api/pdf/create', options)
     .then(res => res.json())
     .then(data => {
