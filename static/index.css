@@ -108,7 +108,7 @@ form {
   column-gap: 2rem;
   row-gap: 1rem;
   place-content: start;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .form-field-wrapper.has-columns-2 {
@@ -118,7 +118,7 @@ form {
 }
 
 .form-field-wrapper label {
-  margin-bottom: .5rem;
+  width: 100%;
   display: inline-block;
 }
 
@@ -126,7 +126,7 @@ form {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: inherit;
-  grid-template-columns: 2fr .5fr .5fr 1fr 1fr 4fr min-content;
+  grid-template-columns: 2fr .5fr 1fr 1fr 4fr min-content;
   align-items: flex-end;
   gap: inherit;
   gap: 10px;
@@ -169,4 +169,8 @@ header .buttons {
   display: flex;
   flex-direction: column;
   gap: .5rem;
+}
+
+label form-field {
+    margin-top: 0.5em;
 }

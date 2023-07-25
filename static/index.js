@@ -39,7 +39,7 @@ const addInvoiceDetails = (e) => {
 }
 
 const getFormDate = (form) => {
-  const elementsPerInvoiceItem = 6;
+  const elementsPerInvoiceItem = 5;
 
   const header = {};
   const headerElements = Array.from(form.elements)
@@ -189,7 +189,7 @@ signinForm.addEventListener('submit', handleSignin);
 pdfPreviewButton.addEventListener('click', handleInvoicePreview);
 
 invoiceBody.addEventListener('click', (e) => {
-  if (e.target.closest('form-field [type="button"]')) {
+  if (e.target.closest('form-field[type="button"]')) {
     console.log('hi')
     addInvoiceDetails(e);
   }
