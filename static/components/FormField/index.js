@@ -10,7 +10,9 @@ export default class FormField extends BaseElement {
     super();
     this.shadowRoot.innerHTML = `
       <slot name="input"></slot>
-      <slot name="icon" onclick="${this.run('openDatePicker()')}"></slot>
+      ${this.getAttribute('type') === 'date'
+        ? `<button onclick="${this.run('openDatePicker()')}"><slot name="icon"></slot></button>`
+        : ''}
     `;
     this.shadowRoot.adoptedStyleSheets = [sheet];
   }
