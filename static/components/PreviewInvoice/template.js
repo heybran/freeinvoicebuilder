@@ -1,6 +1,7 @@
 export default function template(invoiceData) {
   const { header, body } = invoiceData;
-  return templateHeader(header) + templateBody(body) + templateSummary(body);
+  const currency = header.invoiceCurrency;
+  return templateHeader(header) + templateBody(body, currency) + templateSummary(body, currency);
 }
 
 const templateHeader = (header) => {
@@ -28,7 +29,7 @@ const templateHeader = (header) => {
   `;
 }
 
-const templateBody = (body) => {
+const templateBody = (body, currency) => {
   let result = `
     <section class="full">
       <table>
@@ -56,9 +57,9 @@ const templateBody = (body) => {
           </div>
         </td>
         <td>${entry.invoiceItemQuantity}</td>
-        <td>${entry.invoiceItemCurrency} ${entry.invoiceItemUnitPrice}</td>
+        <td>${currency} ${entry.invoiceItemUnitPrice}</td>
         <td>${entry.invoiceItemTax}</td>
-        <td>${entry.invoiceItemCurrency} ${entry.invoiceItemUnitPrice}</td>
+        <td>${currency} ${entry.invoiceItemUnitPrice}</td>
       </tr>
       <tr>
         <td colspan="4">${entry.invoiceItemDetails}</td>
@@ -70,7 +71,7 @@ const templateBody = (body) => {
   return result;
 }
 
-const templateSummary = (body) => {
+const templateSummary = (body, currency) => {
   return `
     <section class="column right">
     <table id="summary">
@@ -82,11 +83,11 @@ const templateSummary = (body) => {
       <tbody>
         <tr>
           <td>Subtotal</td>
-          <td>invoiceItemCurrency subtotalAmount</td>
+          <td>${currency} subtotalAmount</td>
         </tr>
         <tr>
           <td>Total</td>
-          <td>invoiceItemCurrency totalAmount</td>
+          <td>${currency} totalAmount</td>
         </tr>
       </tbody>
     </table>

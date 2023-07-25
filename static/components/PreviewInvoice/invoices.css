@@ -125,3 +125,33 @@ table#summary tbody td {
 table#summary tbody td:last-child {
   text-align: right;
 }
+
+.sr-only {
+    clip: rect(0 0 0 0);
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 1px;
+}
+
+button[value="cancel"] {
+    background: transparent;
+    border: 1px solid currentColor;
+    width: 2rem;
+    height: 2rem;
+    display: inline-flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+button[value="cancel"]:hover,
+button[value="cancel"]:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+}
