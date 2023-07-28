@@ -1,7 +1,7 @@
 // @ts-check
 import { describe, test, mock, before, after } from "node:test";
 import { deepEqual, strictEqual } from "node:assert";
-import os from "node:os";
+// import os from "node:os";
 import Invoice from "../static/invoice.js";
 
 describe('invoice', () => {
@@ -43,5 +43,15 @@ describe('invoice', () => {
   test('subtotal', () => {
     const invoice = new Invoice({ invoiceMeta, invoiceData });
     deepEqual(invoice.subTotal, 3400);
+  });
+
+  test('tax', () => {
+    const invoice = new Invoice({ invoiceMeta, invoiceData });
+    deepEqual(invoice.tax, 1200 * 10 / 100 + 2200 * 10 / 100);
+  });
+
+  test('total', () => {
+    const invoice = new Invoice({ invoiceMeta, invoiceData });
+    deepEqual(invoice.total, 3740);
   });
 })
