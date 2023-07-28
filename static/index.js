@@ -39,12 +39,15 @@ const addInvoiceDetails = (e) => {
 }
 
 const getFormDate = (form) => {
-  const elementsPerInvoiceItem = 5;
+  const elementsPerInvoiceItem = 4;
 
   const header = {};
   const headerElements = Array.from(form.elements)
     .filter(elem => elem.name && elem.form && elem.hasAttribute('data-header'));
-  headerElements.forEach(elem => header[elem.name] = elem.value);
+  headerElements.forEach(elem => {
+    const value = elem.type === 'number' ? Number(elem.value) : elem.value;
+    header[elem.name] = value;
+  });
 
   const bodyElements = Array.from(form.elements)
     .filter(elem => elem.name && elem.form && elem.hasAttribute('data-body'));
@@ -52,12 +55,13 @@ const getFormDate = (form) => {
 
   bodyElements.forEach((elem, index) => {
     const group = Math.floor(index / elementsPerInvoiceItem);
-    body[group][elem.name.replace(/\d/g, "")] = elem.value;
+    const value = elem.type === 'number' ? Number(elem.value) : elem.value;
+    body[group][elem.name.replace(/\d/g, "")] = value;
   });
 
   return {
-    header,
-    body
+    invoiceMeta: header,
+    invoiceData: body
   };
 }
 
@@ -68,7 +72,7 @@ const handleInvoicePreview = (e) => {
     paid: false
   };
 
-  document.querySelector('preview-invoice').html = data;
+  document.querySelector('preview-invoice').data = data;
   document.querySelector('preview-invoice').open();
 
   // const options = {

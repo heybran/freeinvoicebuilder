@@ -144,7 +144,7 @@
               </form-field>
           </label>
         </div>
-        <div class="form-field-wrapper">
+        <div class="form-field-wrapper" style="display: flex; gap: .5em;">
           <label>
               Invoice Date
               <form-field type="date">
@@ -159,65 +159,61 @@
                 </svg>
               </form-field>
           </label>
-
+          <label>
+            Invoice Due Date
+            <form-field type="date" test>
+              <input type="date" name="invoiceDueDate" slot="input" required data-header>
+              <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-calendar">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </form-field>
+          </label>
         </div>
         <div class="form-field-wrapper">
+        <div class="form-field-wrapper">
           <label>
-              Invoice Due Date
-              <form-field type="date" test>
-                <input type="date" name="invoiceDueDate" slot="input" required data-header>
-                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="feather feather-calendar">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="16" y1="2" x2="16" y2="6"></line>
-                  <line x1="8" y1="2" x2="8" y2="6"></line>
-                  <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
+              Tax Rate
+              <form-field>
+                <input type="number" name="invoiceTaxRate" slot="input" autocomplete="off" required data-header>
               </form-field>
           </label>
-
+        </div>   
         </div>
         <div class="display-contents" id="invoice-body">
-            <div class="form-field-wrapper repeatable">
-                <label>
-                    Invoice Item
-                    <form-field>
-                    <input type="text" name="invoiceItem" slot="input" autocomplete="off" required data-body>
-                    </form-field>
-                </label>
-            </div>
+          <div class="form-field-wrapper repeatable">
+              <label>
+                  Invoice Item
+                  <form-field>
+                  <input type="text" name="invoiceItem" slot="input" autocomplete="off" required data-body>
+                  </form-field>
+              </label>
+          </div>
+          <div class="form-field-wrapper repeatable">
+            <label>
+                Details
+                <form-field>
+                  <input type="text" name="invoiceItemDetails" slot="input" autocomplete="off" required data-body>
+                </form-field>
+            </label>
+          </div>
           <div class="form-field-wrapper repeatable">
             <label>
                 Quantity
                 <form-field>
-                  <input type="text" inputmode="numeric" name="invoiceItemQuantity" slot="input" autocomplete="off" required data-body>
+                  <input type="number" name="invoiceItemQuantity" slot="input" autocomplete="off" required data-body>
                 </form-field>
             </label>
-
           </div>
           <div class="form-field-wrapper repeatable">
             <label>
                 Unit Price
                 <form-field>
                   <input type="number" name="invoiceItemUnitPrice" slot="input" autocomplete="off" required data-body>
-                </form-field>
-            </label>
-          </div>
-          <div class="form-field-wrapper repeatable">
-            <label>
-                Tax
-                <form-field>
-                  <input type="number" name="invoiceItemTax" slot="input" autocomplete="off" required data-body>
-                </form-field>
-            </label>
-          </div>
-
-          <div class="form-field-wrapper repeatable">
-            <label>
-                Details
-                <form-field>
-                  <input type="text" name="invoiceItemDetails" slot="input" autocomplete="off" required data-body>
                 </form-field>
             </label>
           </div>
