@@ -1,0 +1,15 @@
+{
+  "name": "free-invoice-app",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brandon Zhang",
+  "license": "ISC"
+}
