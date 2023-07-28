@@ -1,9 +1,34 @@
-export default function template(invoiceData) {
-  const { header, body } = invoiceData;
+// @ts-check
+/**
+ * 
+ * @param {Object} options
+ * @param {import("../../types.js").InvoiceMeta} options.invoiceMeta 
+ * @param {import("../../types.js").InvoiceItem[]} options.invoiceData
+ * @param {number} options.subtotal 
+ * @param {number} options.tax
+ * @param {number} options.total
+ * @returns {string}
+ */
+export default function template(invoice) {
+  const header = invoice.invoiceMeta;
+  const body = invoice.invoiceData;
   const currency = header.invoiceCurrency;
-  return templateHeader(header) + templateBody(body, currency) + templateSummary(body, currency);
+  return templateHeader(header) + templateBody(body, currency) + templateSummary(currency, invoice.subTotal, invoice.tax, invoice.total);
 }
 
+// TODO: how to match local with given currency?
+const usd = (amount) => {
+  return new Intl.NumberFormat("en-US", {
+    style: 'currency',
+    currency: 'USD'
+  }).format(amount);
+}
+
+/**
+ * 
+ * @param {import("../../types.js").InvoiceMeta} header 
+ * @returns {string}
+ */
 const templateHeader = (header) => {
   return `
     <p class="heading column right">Invoice</p>
@@ -29,6 +54,12 @@ const templateHeader = (header) => {
   `;
 }
 
+/**
+ * 
+ * @param {import("../../types.js").InvoiceItem[]} body 
+ * @param {string} currency 
+ * @returns {string}
+ */
 const templateBody = (body, currency) => {
   let result = `
     <section class="full">
@@ -38,7 +69,6 @@ const templateBody = (body, currency) => {
             <th>Invoice Item</th>
             <th>Quantity</th>
             <th>Unit Price</th>
-            <th>Tax</th>
             <th>Subtotal</th>
           </tr>
         </thead>
@@ -57,9 +87,8 @@ const templateBody = (body, currency) => {
           </div>
         </td>
         <td>${entry.invoiceItemQuantity}</td>
-        <td>${currency} ${entry.invoiceItemUnitPrice}</td>
-        <td>${entry.invoiceItemTax}</td>
-        <td>${currency} ${entry.invoiceItemUnitPrice}</td>
+        <td>${currency} ${usd(entry.invoiceItemUnitPrice)}</td>
+        <td>${currency} ${usd(entry.invoiceItemUnitPrice * entry.invoiceItemQuantity)}</td>
       </tr>
       <tr>
         <td colspan="4">${entry.invoiceItemDetails}</td>
@@ -71,7 +100,14 @@ const templateBody = (body, currency) => {
   return result;
 }
 
-const templateSummary = (body, currency) => {
+/**
+ * 
+ * @param {string} currency 
+ * @param {number} subTotal
+ * @param {number} tax
+ * @param {number} total
+ */
+const templateSummary = (currency, subTotal, tax, total) => {
   return `
     <section class="column right">
     <table id="summary">
@@ -83,11 +119,15 @@ const templateSummary = (body, currency) => {
       <tbody>
         <tr>
           <td>Subtotal</td>
-          <td>${currency} subtotalAmount</td>
+          <td>${currency} ${usd(subTotal)}</td>
+        </tr>
+        <tr>
+          <td>Tax</td>
+          <td>${currency} ${usd(tax)}</td>
         </tr>
         <tr>
           <td>Total</td>
-          <td>${currency} totalAmount</td>
+          <td>${currency} ${usd(total)}</td>
         </tr>
       </tbody>
     </table>

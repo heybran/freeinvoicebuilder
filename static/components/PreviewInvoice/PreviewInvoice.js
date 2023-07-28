@@ -1,6 +1,7 @@
 import BaseElement from '../BaseElement/BaseElement.js';
 import sheet from './invoices.css' assert { type: 'css' };
 import template from './template.js';
+import Invoice from '../../invoice.js';
 
 export default class PreviewInvoice extends BaseElement {
   static get observedAttributes() {
@@ -19,13 +20,14 @@ export default class PreviewInvoice extends BaseElement {
           <output width="100%" height="100%"></output>
         </form>
       </dialog>
-      <slot name="icon" onclick="${this.run('openDatePicker()')}"></slot>
     `;
     this.shadowRoot.adoptedStyleSheets = [sheet];
   }
 
-  set html(data) {
-    this.shadowRoot.querySelector('output').innerHTML = template(data);
+  set data({ invoiceMeta, invoiceData }) {
+    console.log(invoiceMeta);
+    this.invoice = new Invoice({ invoiceMeta, invoiceData });
+    this.shadowRoot.querySelector('output').innerHTML = template(this.invoice);
   }
 
   open() {
