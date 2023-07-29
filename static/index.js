@@ -2,6 +2,7 @@
 import FormField from "./components/FormField/index.js";
 import FormButton from "./components/FormButton/index.js";
 import PreviewInvoice from "./components/PreviewInvoice/PreviewInvoice.js";
+import Invoice from "./invoice.js";
 
 const undefinedElements = document.querySelectorAll(':not(:defined)');
 const promises = [...undefinedElements].map(
@@ -21,24 +22,43 @@ const invoiceBody = document.querySelector('#invoice-body');
 const repeatableFields = invoiceBody.querySelectorAll('.repeatable');
 let id = 0;
 
-const addInvoiceDetails = (e) => {
+const addInvoiceRow = (e) => {
   id++;
 
   console.log([...repeatableFields].length);
 
-  [...repeatableFields].forEach(field => {
-    field = field.cloneNode(true);
-    const input = field.querySelector('input');
+  [...repeatableFields].forEach(wrapper => {
+    wrapper = wrapper.cloneNode(true);
+    wrapper.setAttribute('data-index', id);
+    const input = wrapper.querySelector('input');
     if (input.name) {
       input.name = input.name + id;
     }
 
-    invoiceBody.append(field);
+    if (input.type !== 'button') {
+      input.value = '';
+    } else {
+      const field = wrapper.firstElementChild;
+      const deleteField = field.cloneNode(true);
+      deleteField.querySelector('input').value = '-';
+      wrapper.append(deleteField);
+      wrapper.classList.add('has-columns-2');
+    }
+
+    invoiceBody.append(wrapper);
     // invoiceBody.insertBefore(field, e.target.closest('.form-field-wrapper'));
   });
 }
 
-const getFormDate = (form) => {
+const removeInvoiceRow = (e) => {
+  const index = e.target.closest('.form-field-wrapper').getAttribute('data-index');;
+  do {
+    const wrapperToDelete = invoiceBody.querySelector(`.form-field-wrapper[data-index="${index}"]`);
+    wrapperToDelete.remove();
+  } while (invoiceBody?.querySelector(`.form-field-wrapper[data-index="${index}"]`));
+}
+
+const getFormData = (form) => {
   const elementsPerInvoiceItem = 4;
 
   const header = {};
@@ -68,12 +88,14 @@ const getFormDate = (form) => {
 const handleInvoicePreview = (e) => {
   e.preventDefault();
   const data = {
-    ...getFormDate(invoiceForm),
-    paid: false
+    ...getFormData(invoiceForm),
+    paid: false // not implemented yet
   };
 
-  document.querySelector('preview-invoice').data = data;
-  document.querySelector('preview-invoice').open();
+  document.querySelector('preview-invoice').preview(new Invoice({ ...getFormData(invoiceForm) }));
+  // THOUGHTS: a better API?
+  // new Invoice(getFormData(invoiceForm)).previewWith(document.querySelector('preview-invoice'));
+
 
   // const options = {
   //   method: 'POST',
@@ -99,7 +121,7 @@ const handleInvoiceFormSubmit = (e) => {
   // const formData = new FormData(invoiceForm);
   // console.log(formData);
   const data = {
-    ...getFormDate(invoiceForm),
+    ...getFormData(invoiceForm),
     paid: false
   };
 
@@ -193,8 +215,12 @@ signinForm.addEventListener('submit', handleSignin);
 pdfPreviewButton.addEventListener('click', handleInvoicePreview);
 
 invoiceBody.addEventListener('click', (e) => {
-  if (e.target.closest('form-field[type="button"]')) {
-    console.log('hi')
-    addInvoiceDetails(e);
+  const isButton = e.target.closest('form-field[type="button"]');
+  const isAddButton = isButton?.input.value === '+';
+  const isDeleteButton = isButton?.input.value === '-';
+  if (isAddButton) {
+    addInvoiceRow(e);
+  } else if (isDeleteButton) {
+    removeInvoiceRow(e);
   }
 });

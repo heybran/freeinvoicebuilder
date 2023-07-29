@@ -43,7 +43,7 @@ export default class Invoice {
     return this.invoiceData.reduce((basket, item) => {
       return basket += item.invoiceItemQuantity * item.invoiceItemUnitPrice;
     }, 0);
-  } 
+  }
 
   get tax() {
     return this.subTotal * this.invoiceMeta.invoiceTaxRate / 100;
