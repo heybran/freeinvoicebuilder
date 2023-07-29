@@ -1,7 +1,6 @@
 import BaseElement from '../BaseElement/BaseElement.js';
 import sheet from './invoices.css' assert { type: 'css' };
 import template from './template.js';
-import Invoice from '../../invoice.js';
 
 export default class PreviewInvoice extends BaseElement {
   static get observedAttributes() {
@@ -24,10 +23,9 @@ export default class PreviewInvoice extends BaseElement {
     this.shadowRoot.adoptedStyleSheets = [sheet];
   }
 
-  set data({ invoiceMeta, invoiceData }) {
-    console.log(invoiceMeta);
-    this.invoice = new Invoice({ invoiceMeta, invoiceData });
-    this.shadowRoot.querySelector('output').innerHTML = template(this.invoice);
+  preview(invoice) {
+    this.shadowRoot.querySelector('output').innerHTML = template(invoice);
+    this.open();
   }
 
   open() {
