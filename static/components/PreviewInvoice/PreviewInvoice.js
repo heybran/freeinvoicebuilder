@@ -1,5 +1,6 @@
 import BaseElement from '../BaseElement/BaseElement.js';
-import sheet from './invoices.css' assert { type: 'css' };
+import invoiceCSS from './invoices.css' assert { type: 'css' };
+import componentCSS from "./index.css" assert { type: 'css' };
 import template from './template.js';
 
 export default class PreviewInvoice extends BaseElement {
@@ -20,7 +21,7 @@ export default class PreviewInvoice extends BaseElement {
         </form>
       </dialog>
     `;
-    this.shadowRoot.adoptedStyleSheets = [sheet];
+    this.shadowRoot.adoptedStyleSheets = [invoiceCSS, componentCSS];
   }
 
   preview(invoice) {

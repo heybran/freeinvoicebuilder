@@ -1,10 +1,10 @@
 // @ts-check
 /**
- * 
+ *
  * @param {Object} options
- * @param {import("../../types.js").InvoiceMeta} options.invoiceMeta 
+ * @param {import("../../types.js").InvoiceMeta} options.invoiceMeta
  * @param {import("../../types.js").InvoiceItem[]} options.invoiceData
- * @param {number} options.subtotal 
+ * @param {number} options.subtotal
  * @param {number} options.tax
  * @param {number} options.total
  * @returns {string}
@@ -25,8 +25,8 @@ const usd = (amount) => {
 }
 
 /**
- * 
- * @param {import("../../types.js").InvoiceMeta} header 
+ *
+ * @param {import("../../types.js").InvoiceMeta} header
  * @returns {string}
  */
 const templateHeader = (header) => {
@@ -55,9 +55,9 @@ const templateHeader = (header) => {
 }
 
 /**
- * 
- * @param {import("../../types.js").InvoiceItem[]} body 
- * @param {string} currency 
+ *
+ * @param {import("../../types.js").InvoiceItem[]} body
+ * @param {string} currency
  * @returns {string}
  */
 const templateBody = (body, currency) => {
@@ -90,9 +90,6 @@ const templateBody = (body, currency) => {
         <td>${currency} ${usd(entry.invoiceItemUnitPrice)}</td>
         <td>${currency} ${usd(entry.invoiceItemUnitPrice * entry.invoiceItemQuantity)}</td>
       </tr>
-      <tr>
-        <td colspan="4">${entry.invoiceItemDetails}</td>
-      </tr>
     `;
   });
 
@@ -101,8 +98,8 @@ const templateBody = (body, currency) => {
 }
 
 /**
- * 
- * @param {string} currency 
+ *
+ * @param {string} currency
  * @param {number} subTotal
  * @param {number} tax
  * @param {number} total
