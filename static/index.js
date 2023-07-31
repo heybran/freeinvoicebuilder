@@ -92,28 +92,26 @@ const handleInvoicePreview = (e) => {
     paid: false // not implemented yet
   };
 
-  document.querySelector('preview-invoice').preview(new Invoice({ ...getFormData(invoiceForm) }));
+  // document.querySelector('preview-invoice').preview(new Invoice({ ...getFormData(invoiceForm) }));
   // THOUGHTS: a better API?
   // new Invoice(getFormData(invoiceForm)).previewWith(document.querySelector('preview-invoice'));
 
 
-  // const options = {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Basic ${localStorage.getItem('token')}`
-  //   },
-  //   body: JSON.stringify(data)
-  // };
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Authorization': `Basic ${localStorage.getItem('token')}`
+    },
+    body: JSON.stringify(getFormData(invoiceForm)),
+  };
 
-  // fetch('/api/pdf/preview', options)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data)
-  //     document.querySelector('preview-invoice').html = data.data;
-  //     document.querySelector('preview-invoice').open();
-  //   })
-  //   .catch(err => console.error(err));
+  fetch('/api/pdf/preview', options)
+    .then(res => res.text())
+    .then(htmlString => {
+      document.querySelector('preview-invoice').preview(htmlString);
+    })
+    .catch(err => console.error(err));
 }
 
 const handleInvoiceFormSubmit = (e) => {
@@ -131,7 +129,7 @@ const handleInvoiceFormSubmit = (e) => {
       'Content-Type': 'application/json',
       'Authorization': `Basic ${localStorage.getItem('token')}`
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(getFormData(invoiceForm)),
   };
 
   // fetch('./api/invoices', options)
