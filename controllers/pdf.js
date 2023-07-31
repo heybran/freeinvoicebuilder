@@ -21,7 +21,7 @@ export const previewPDF = async (req, res, body) => {
     return res.end(invoiceHTMLString);
   } catch (error) {
     res.statusCode = 500;
-    res.setHeader('Content-Type', 'application');
+    res.setHeader('Content-Type', 'application/json');
     return res.end(JSON.stringify(new ProblemDetails({
       type: 'about:blank',
       title: "Internal server error",
@@ -60,7 +60,7 @@ export const createPDF = async (req, res, body) => {
     console.log('done');
     
     res.statusCode = 200;
-    res.setHeader('Content-Type', 'application');
+    res.setHeader('Content-Type', 'application/json');
     // JSON.stringify is important here
     // it will throw error if not present even though pdf will be created
     res.end(JSON.stringify({
@@ -71,7 +71,7 @@ export const createPDF = async (req, res, body) => {
     await browser.close();
   } catch (error) {
     res.statusCode = 500;
-    res.setHeader('Content-Type', 'application');
+    res.setHeader('Content-Type', 'application/json');
     return res.end(JSON.stringify(new ProblemDetails({
       type: 'about:blank',
       title: "Internal server error",
