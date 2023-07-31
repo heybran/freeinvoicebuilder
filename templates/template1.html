@@ -1,81 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <title>PDF Template 1</title>
-  <style>
 
-  </style>
-</head>
-<body>
-  <p class="heading column right">Invoice</p>
-  <section class="column left">
-    <small class="uppercase">From</small>
-    <div class="sender organization">senderOrganization</div>
-    <div class="sender fullname">senderFullname</div>
-    <div class="sender email">senderEmail</div>
-  </section>
-  <section class="column right">
-    <small class="uppercase">To</small>
-    <div class="receiver organization">receiverOrganization</div>
-    <div class="receiver fullname">receiverFullname</div>
-    <div class="receiver email">receiverEmail</div>
-  </section>
-  <section class="column left">
-    <p><strong>Invoice No.: </strong>invoiceNumber</p>
-    <p><strong>Invoice Date: </strong>invoiceDate</p>
-  </section>
-  <section class="column right flex flex-direction-column justify-content-end">
-    <p><strong>Due: </strong>invoiceDueDate</p>
-  </section>
-  <section class="full">
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>HRS/TY</th>
-          <th>Rate</th>
-          <th>Tax</th>
-          <th>Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>invoiceItem</td>
-          <td>invoiceItemQuantity</td>
-          <td>invoiceItemRate</td>
-          <td></td>
-          <td>invoiceItemCurrency invoiceItemRate</td>
-        </tr>
-        <tr>
-          <td colspan="4">invoiceItemDetails</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-  <section class="column right">
-    <table id="summary">
-      <thead>
-        <tr>
-          <th colspan="2">Invoice Summary</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Subtotal</td>
-          <td>invoiceItemCurrency subtotalAmount</td>
-        </tr>
-        <tr>
-          <td>Total</td>
-          <td>invoiceItemCurrency totalAmount</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-</body>
-</html>
+<p class="heading column right">Invoice</p>
+<section class="column left">
+  <small class="uppercase">From</small>
+  <div class="sender organization">senderOrganization</div>
+  <div class="sender fullname">senderFullname</div>
+  <div class="sender email">senderEmail</div>
+</section>
+<section class="column right">
+  <small class="uppercase">To</small>
+  <div class="receiver organization">receiverOrganization</div>
+  <div class="receiver fullname">receiverFullname</div>
+  <div class="receiver email">receiverEmail</div>
+</section>
+<section class="column left">
+  <p><strong>Invoice No.: </strong>invoiceNumber</p>
+  <p><strong>Invoice Date: </strong>invoiceDate</p>
+</section>
+<section class="column right flex flex-direction-column justify-content-end">
+  <p><strong>Due: </strong>invoiceDueDate</p>
+</section>
+<section class="full">
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>HRS/TY</th>
+        <th>Rate</th>
+        <th>Tax</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>invoiceItem</td>
+        <td>invoiceItemQuantity</td>
+        <td>invoiceItemRate</td>
+        <td></td>
+        <td>invoiceItemCurrency invoiceItemRate</td>
+      </tr>
+      <tr>
+        <td colspan="4">invoiceItemDetails</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section class="column right">
+  <table id="summary">
+    <thead>
+      <tr>
+        <th colspan="2">Invoice Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Subtotal</td>
+        <td>invoiceItemCurrency subtotalAmount</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>invoiceItemCurrency totalAmount</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
