@@ -1,5 +1,4 @@
 import BaseElement from '../BaseElement/BaseElement.js';
-import componentCSS from "./index.css" assert { type: 'css' };
 
 export default class PreviewInvoice extends BaseElement {
   static get observedAttributes() {
@@ -9,6 +8,51 @@ export default class PreviewInvoice extends BaseElement {
   constructor() {
     super();
     this.shadowRoot.innerHTML = `
+      <style>
+        .sr-only {
+          clip: rect(0 0 0 0);
+          border: 0;
+          height: 1px;
+          margin: -1px;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
+          top: 0;
+          width: 1px;
+        }
+
+        button[value="cancel"] {
+          background: transparent;
+          border: 1px solid currentColor;
+          width: 2rem;
+          height: 2rem;
+          display: inline-flex;
+          border-radius: 50%;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          position: fixed;
+          top: 1rem;
+          right: 1rem;
+        }
+
+        button[value="cancel"]:hover,
+        button[value="cancel"]:focus-visible {
+          outline: 2px solid var(--color-primary);
+          outline-offset: 4px;
+        }
+
+        ::backdrop {
+          background: #eeeeeecc;
+          filter: blur(2px);
+        }
+
+        dialog {
+          position: relative;
+          border-color: transparent;
+          box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+        }
+      </style>
       <dialog>
         <form method="dialog">
           <button value="cancel">
@@ -20,7 +64,6 @@ export default class PreviewInvoice extends BaseElement {
         </form>
       </dialog>
     `;
-    this.shadowRoot.adoptedStyleSheets = [componentCSS];
   }
 
   preview(invoiceHTMLString) {

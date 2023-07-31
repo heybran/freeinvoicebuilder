@@ -1,143 +1,150 @@
 import template from "./template.js";
+import Invoice from "../static/invoice.js";
 
-export function invoiceLayoutWithoutHeader(invoiceObject) {
+function renderInvoice(invoice) {
   return `
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      
-      dialog {
-        width: 60rem;
-      }
-      
-      output {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-      
-      section {
-        margin-top: 1rem;
-      }
-      
-      .right {
-        grid-column-start: 2;
-      }
-      
-      .full {
-        grid-column: span 2;
-      }
-      
-      small {
-        text-transform: uppercase;
-        color: #888;
-        font-size: .7rem;
-      }
-      
-      small + * {
-        margin-top: 1rem;
-      }
-      
-      .organization {
-        color: #333;
-        font-size: 1.2rem;
-        font-weight: bold;
-      }
-      
-      .fullname, .email {
-        margin-top: .5rem;
-      }
-      
-      strong {
-        color: #333;
-      }
-      
-      .flex {
-        display: flex;
-      }
-      
-      .flex-direction-column {
-        flex-direction: column;
-      }
-      
-      .justify-content-end {
-        justify-content: flex-end;
-      }
-      
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 1rem;
-        --border: #dadada;
-      }
-      
-      thead {
-        background-color: #f1f1f1;
-        border-top: 2px solid var(--border);
-        border-bottom: 2px solid var(--border);
-      }
-      
-      tr {
-        display: grid;
-        grid-template-columns: 50% 10% 20% 20%;
-        align-items: center;
-      }
-      
-      th {
-        padding-inline: .75rem;
-        padding-block: 1rem;
-        text-align: left;
-      }
-      
-      th:not(:first-child) {
-        text-align: right;
-      }
-      
-      td {
-        padding-inline: .75rem;
-        padding-block: 1rem;
-        text-align: center;
-      }
-      
-      td:first-child {
-        text-align: left;
-      }
-      
-      td:not(:first-child) {
-        text-align: right;
-      }
-      
-      .invoiceItemDetails {
-        font-size: .85em;
-        color: #888;
-      }
-      
-      table#summary tr {
-        grid-template-columns: 1fr;
-      }
-      
-      table#summary tbody tr {
-        border-bottom: 2px solid var(--border);
-        grid-template-columns: 1fr 2fr;
-      }
-      
-      table#summary th {
-        text-align: center;
-      }
-      
-      table#summary tbody td {
-        padding-block: 1rem;
-      }
-      
-      table#summary tbody td:last-child {
-        text-align: right;
-      }    
-    </style>
-    <output>${template(invoiceObject)}</output>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    dialog {
+      width: 60rem;
+    }
+    
+    output {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    section {
+      margin-top: 1rem;
+    }
+    
+    .right {
+      grid-column-start: 2;
+    }
+    
+    .full {
+      grid-column: span 2;
+    }
+    
+    small {
+      text-transform: uppercase;
+      color: #888;
+      font-size: .7rem;
+    }
+    
+    small + * {
+      margin-top: 1rem;
+    }
+    
+    .organization {
+      color: #333;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    
+    .fullname, .email {
+      margin-top: .5rem;
+    }
+    
+    strong {
+      color: #333;
+    }
+    
+    .flex {
+      display: flex;
+    }
+    
+    .flex-direction-column {
+      flex-direction: column;
+    }
+    
+    .justify-content-end {
+      justify-content: flex-end;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+      --border: #dadada;
+    }
+    
+    thead {
+      background-color: #f1f1f1;
+      border-top: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+    }
+    
+    tr {
+      display: grid;
+      grid-template-columns: 50% 10% 20% 20%;
+      align-items: center;
+    }
+    
+    th {
+      padding-inline: .75rem;
+      padding-block: 1rem;
+      text-align: left;
+    }
+    
+    th:not(:first-child) {
+      text-align: right;
+    }
+    
+    td {
+      padding-inline: .75rem;
+      padding-block: 1rem;
+      text-align: center;
+    }
+    
+    td:first-child {
+      text-align: left;
+    }
+    
+    td:not(:first-child) {
+      text-align: right;
+    }
+    
+    .invoiceItemDetails {
+      font-size: .85em;
+      color: #888;
+    }
+    
+    table#summary tr {
+      grid-template-columns: 1fr;
+    }
+    
+    table#summary tbody tr {
+      border-bottom: 2px solid var(--border);
+      grid-template-columns: 1fr 2fr;
+    }
+    
+    table#summary th {
+      text-align: center;
+    }
+    
+    table#summary tbody td {
+      padding-block: 1rem;
+    }
+    
+    table#summary tbody td:last-child {
+      text-align: right;
+    }    
+  </style>
+  <output>${template(invoice)}</output>
   `;
 }
 
-export function invoiceLayoutWithHeader(invoiceObject) {
+export function invoiceLayoutWithoutHeader(data) {
+  const invoice = new Invoice(data);
+  return renderInvoice(invoice);
+}
+
+export function invoiceLayoutWithHeader(data) {
+  const invoice = new Invoice(data);
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -158,141 +165,7 @@ export function invoiceLayoutWithHeader(invoiceObject) {
       </style>
     </head>
     <body>
-      <style>
-        * {
-          box-sizing: border-box;
-        }
-        
-        dialog {
-          width: 60rem;
-        }
-        
-        output {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-        }
-        
-        section {
-          margin-top: 1rem;
-        }
-        
-        .right {
-          grid-column-start: 2;
-        }
-        
-        .full {
-          grid-column: span 2;
-        }
-        
-        small {
-          text-transform: uppercase;
-          color: #888;
-          font-size: .7rem;
-        }
-        
-        small + * {
-          margin-top: 1rem;
-        }
-        
-        .organization {
-          color: #333;
-          font-size: 1.2rem;
-          font-weight: bold;
-        }
-        
-        .fullname, .email {
-          margin-top: .5rem;
-        }
-        
-        strong {
-          color: #333;
-        }
-        
-        .flex {
-          display: flex;
-        }
-        
-        .flex-direction-column {
-          flex-direction: column;
-        }
-        
-        .justify-content-end {
-          justify-content: flex-end;
-        }
-        
-        table {
-          border-collapse: collapse;
-          width: 100%;
-          margin-top: 1rem;
-          --border: #dadada;
-        }
-        
-        thead {
-          background-color: #f1f1f1;
-          border-top: 2px solid var(--border);
-          border-bottom: 2px solid var(--border);
-        }
-        
-        tr {
-          display: grid;
-          grid-template-columns: 50% 10% 20% 20%;
-          align-items: center;
-        }
-        
-        th {
-          padding-inline: .75rem;
-          padding-block: 1rem;
-          text-align: left;
-        }
-        
-        th:not(:first-child) {
-          text-align: right;
-        }
-        
-        td {
-          padding-inline: .75rem;
-          padding-block: 1rem;
-          text-align: center;
-        }
-        
-        td:first-child {
-          text-align: left;
-        }
-        
-        td:not(:first-child) {
-          text-align: right;
-        }
-        
-        .invoiceItemDetails {
-          font-size: .85em;
-          color: #888;
-        }
-        
-        table#summary tr {
-          grid-template-columns: 1fr;
-        }
-        
-        table#summary tbody tr {
-          border-bottom: 2px solid var(--border);
-          grid-template-columns: 1fr 2fr;
-        }
-        
-        table#summary th {
-          text-align: center;
-        }
-        
-        table#summary tbody td {
-          padding-block: 1rem;
-        }
-        
-        table#summary tbody td:last-child {
-          text-align: right;
-        }    
-      </style>
-      <output>
-        ${template(invoiceObject)}
-      </output>
-      
+      ${renderInvoice(invoice)}
     </body>
     </html>
   `;

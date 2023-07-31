@@ -62,7 +62,3 @@
 :host([has-loader])  .button-loader {
   grid-area: 1 / 1 / 1 / 1;
 }
-
-:host(loading) .button-text {
-
-}

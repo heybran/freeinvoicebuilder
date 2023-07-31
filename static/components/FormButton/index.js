@@ -1,5 +1,4 @@
 import BaseElement from '../BaseElement/BaseElement.js';
-import sheet from './index.css' assert { type: 'css' };
 
 export default class FormButton extends BaseElement {
   static get observedAttributes() {
@@ -9,9 +8,74 @@ export default class FormButton extends BaseElement {
   constructor() {
     super();
     this.shadowRoot.innerHTML = `
+      <style>
+        :host {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-block: 0;
+          padding-inline: var(--padding-input);
+          color: var(--color-input);
+          border: var(--width-border) solid var(--color-border-normal);
+          border-radius: var(--radius-border);
+        }
+
+        :host(:focus-within) {
+          border-color: var(--color-primary);
+          box-shadow: var(--box-shadow-primary);
+        }
+
+        :host([type=button]) {
+          background-color: var(--color-border-normal);
+        }
+
+        :host([theme="primary"]) {
+          background-color: var(--color-primary);
+          color: whitesmoke;
+        }
+
+        :host([theme="white"]) {
+          background-color: whitesmoke;
+          color: var(--color-input);
+        }
+
+        :host([type=button]:hover) {
+          border-color: var(--color-primary);
+          box-shadow: var(--box-shadow-primary);
+        }
+
+        ::slotted(button) {
+          padding-inline: 0;
+          padding-block: var(--padding-input);
+          height: 100%;
+          background-color: transparent;
+          border: none;
+          appearance: none;
+          width: 100%;
+          font-size: inherit;
+          font-family: inherit;
+          color: inherit;
+        }
+
+        ::slotted([type=button]),
+        ::slotted([type=submit]) {
+          cursor: pointer;
+        }
+
+        ::slotted(button:focus) {
+          outline: none;
+        }
+
+        :host([has-loader]) ::slotted(button) {
+          display: grid;
+        }
+
+        :host([has-loader])  .button-loader {
+          grid-area: 1 / 1 / 1 / 1;
+        }
+      </style>
       <slot name="button"></slot>
     `;
-    this.shadowRoot.adoptedStyleSheets = [sheet];
   }
 
   get inputType() {

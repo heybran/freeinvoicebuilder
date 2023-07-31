@@ -28,13 +28,14 @@ body {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-rows: 1fr auto;
   /* gap: 3rem; */
   background-color: white;
   /* padding: 1.2rem;
   padding-right: 2.2rem; */
-  height: 100vh;
+  min-height: 100vh;
   /* height: calc(100vh - var(--body-padding) * 2); */
+  align-content: start;
 }
 
 header {
@@ -47,9 +48,26 @@ header {
   grid-template-rows: auto 1fr auto;
 }
 
+.wrapper > header {
+  display: none;
+}
+
 .content {
   padding: 3em;
   overflow: scroll;
+  max-width: 1360px;
+  margin: auto;
+  margin-top: 0;
+}
+
+footer {
+  padding: 1em 3em;
+  max-width: 1360px;
+  margin: auto;
+}
+
+footer a {
+  color: inherit;
 }
 
 nav {
