@@ -11,5 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brandon Zhang",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^20.9.0"
+  }
 }
