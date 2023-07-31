@@ -38,6 +38,7 @@ const server = http.createServer((req, res) => {
     // Check if file exists
     fs.access(filePath, fs.constants.F_OK, (err) => {
       if (err) {
+        console.log(err);
         res.statusCode = 404;
         return res.end(JSON.stringify(new ProblemDetails({
           type: 'about:blank',
@@ -72,6 +73,8 @@ const server = http.createServer((req, res) => {
           contentType = 'text/css';
         } else if (extname === '.js') {
           contentType = 'text/javascript';
+        } else if (extname === '.pdf') {
+          contentType = 'application/pdf';
         }
 
         // Set the content type header and send the data
