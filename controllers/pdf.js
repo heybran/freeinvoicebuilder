@@ -46,7 +46,7 @@ export const createPDF = async (req, res, body) => {
     await page.emulateMediaType('screen');
     const uuid = randomUUID();
     await page.pdf({
-      path: path.join(__dirname, `../assets/invoices/${uuid}.pdf`),
+      path: path.join(__dirname, `../static/invoices/${uuid}.pdf`),
       format: 'A4',
       scale: 0.9,
       printBackground: true
@@ -59,7 +59,9 @@ export const createPDF = async (req, res, body) => {
     // JSON.stringify is important here
     // it will throw error if not present even though pdf will be created
     res.end(JSON.stringify({
-      invoicePath: `/assets/invoices/${uuid}.pdf`
+      // we're already a const frontendFolder = 'static' in server file
+      // invoicePath: `/static/invoices/${uuid}.pdf`
+      invoicePath: `/invoices/${uuid}.pdf`
     }));
     await browser.close();
   } catch (error) {
