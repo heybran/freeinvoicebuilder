@@ -132,17 +132,14 @@ const handleInvoiceFormSubmit = (e) => {
     body: JSON.stringify(getFormData(invoiceForm)),
   };
 
-  // fetch('./api/invoices', options)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data)
-  //   })
-  //   .catch(err => console.error(err));
-
   fetch('/api/pdf/create', options)
     .then(res => res.json())
     .then(data => {
-      // console.log(data)
+      const { invoicePath } = data;
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.location.protocol + '//' + window.location.host + invoicePath;
+      downloadLink.download = 'invoice.pdf';
+      downloadLink.click();
     })
     .catch(err => console.error(err));
 }
