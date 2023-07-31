@@ -10,6 +10,9 @@
   "scripts": {
     "test": "node --test"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "author": "Brandon Zhang",
   "license": "ISC",
   "dependencies": {
