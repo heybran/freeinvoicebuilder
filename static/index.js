@@ -12,8 +12,8 @@ const promises = [...undefinedElements].map(
 Promise.all(promises).then(() => document.querySelector('.wrapper').style.display = '');
 
 const invoiceForm = document.forms['invoice-form'];
-const signupForm = document.forms['signup-form'];
-const signinForm = document.forms['signin-form'];
+// const signupForm = document.forms['signup-form'];
+// const signinForm = document.forms['signin-form'];
 const openSignupButton = document.querySelector('#signup');
 const openSigninButton = document.querySelector('#signin');
 const pdfPreviewButton = document.querySelector('#preview-button');
@@ -205,8 +205,8 @@ const handleSignin = (e) => {
 invoiceForm.addEventListener('submit', handleInvoiceFormSubmit);
 openSignupButton.addEventListener('click', showSignupForm);
 openSigninButton.addEventListener('click', showSigninForm);
-signupForm.addEventListener('submit', handleSignup);
-signinForm.addEventListener('submit', handleSignin);
+// signupForm.addEventListener('submit', handleSignup);
+// signinForm.addEventListener('submit', handleSignin);
 pdfPreviewButton.addEventListener('click', handleInvoicePreview);
 
 invoiceBody.addEventListener('click', (e) => {
