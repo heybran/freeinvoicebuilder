@@ -41,10 +41,7 @@ export const createPDF = async (req, res, body) => {
   try {
     const template = invoiceLayoutWithHeader(JSON.parse(body));
     const browser = await puppeteer.launch({
-      headless: 'new',
-      // `headless: true` (default) enables old Headless;
-      // `headless: 'new'` enables new Headless;
-      // `headless: false` enables “headful” mode.
+      headless: true,
     });
     const page = await browser.newPage();
     await page.setContent(template);
