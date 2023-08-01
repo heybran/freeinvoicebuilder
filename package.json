@@ -18,5 +18,8 @@
   "license": "ISC",
   "dependencies": {
     "puppeteer": "^20.9.0"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.4.1"
   }
 }
